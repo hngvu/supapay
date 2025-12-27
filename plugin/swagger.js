@@ -10,8 +10,6 @@ async function swaggerPlugin(fastify, options) {
         description: 'Microservice thanh toán SePay + Supabase',
         version: '1.0.0',
       },
-      host: 'localhost:3000',
-      schemes: ['http'],
       consumes: ['application/json'],
       produces: ['application/json'],
       securityDefinitions: {
