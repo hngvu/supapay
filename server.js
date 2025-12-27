@@ -1,10 +1,7 @@
 import Fastify from 'fastify';
-import dotenv from 'dotenv';
 import swaggerPlugin from './plugin/swagger.js';
 import paymentRoutes from './route/payment.js';
 import { verifyInternalRequest, verifySepayWebhook } from './middleware/auth.js';
-
-dotenv.config();
 
 const fastify = Fastify({ logger: true });
 

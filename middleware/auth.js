@@ -1,6 +1,3 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
 /**
  * 1. Middleware bảo vệ API nội bộ (cho /create)
  * Service khác muốn gọi phải gửi Header: "x-api-key": "super_secret_..."
