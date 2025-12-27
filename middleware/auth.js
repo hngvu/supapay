@@ -5,7 +5,7 @@
 export const verifyInternalRequest = async (request, reply) => {
   const apiKey = request.headers['x-api-key'];
 
-  if (!apiKey || apiKey !== process.env.INTERNAL_API_KEY) {
+  if (!apiKey || apiKey !== process.env.INTERNAL_KEY) {
     throw new Error('Unauthorized: Invalid Internal API Key');
     // Fastify sẽ tự trả về 401 hoặc 500 tuỳ config, ta sẽ custom lại ở dưới
   }
@@ -26,7 +26,7 @@ export const verifySepayWebhook = async (request, reply) => {
   // Tách chữ "Bearer " ra để lấy token
   const token = authHeader.split(' ')[1]; 
   
-  if (token !== process.env.SEPAY_API_KEY) {
+  if (token !== process.env.SEPAY_KEY) {
     throw new Error('Unauthorized: Fake SePay Request');
   }
 };
