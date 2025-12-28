@@ -137,7 +137,7 @@ export default async function paymentRoutes(fastify, options) {
   });
 
   // --- API 3: Lấy thông tin giao dịch ---
-  fastify.get('/status/:ref_code', {
+  fastify.get('/:ref_code', {
     onRequest: [fastify.verifyInternalRequest],
     schema: {
       tags: ['Payment'],
