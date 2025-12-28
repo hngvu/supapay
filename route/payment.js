@@ -145,7 +145,7 @@ export default async function paymentRoutes(fastify, options) {
   });
 
   // --- API 3: Lấy thông tin giao dịch ---
-  fastify.get('/:ref_code', {
+  fastify.get('/txn/:ref_code', {
     onRequest: [fastify.verifyInternalRequest],
     schema: {
       tags: ['Payment'],
@@ -162,7 +162,10 @@ export default async function paymentRoutes(fastify, options) {
           type: 'object',
           properties: {
             success: { type: 'boolean' },
-            data: { type: 'object' }
+            data: {
+              type: 'object',
+              additionalProperties: true
+            }
           }
         }
       }
