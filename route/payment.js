@@ -4,7 +4,7 @@ import { generateContentCode } from '../util/generator.js';
 export default async function paymentRoutes(fastify, options) {
 
   // --- API 1: Tạo Payment Link ---
-  fastify.post('/create', {
+  fastify.post('/init', {
     onRequest: [fastify.verifyInternalRequest],
     schema: {
       tags: ['Payment'],

@@ -4,4 +4,4 @@ import { customAlphabet } from 'nanoid';
 const alphabet = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
 const generate = customAlphabet(alphabet, 6);
 
-export const generateContentCode = () => generate();
+export const generateContentCode = () => 'CK' + generate();

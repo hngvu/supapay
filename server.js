@@ -13,7 +13,7 @@ fastify.decorate('verifySepayWebhook', verifySepayWebhook);
 fastify.register(swaggerPlugin);
 
 // 2. Đăng ký Routes
-fastify.register(paymentRoutes, { prefix: '/api/v1/payment' });
+fastify.register(paymentRoutes);
 
 // 3. Khởi chạy Server
 const start = async () => {
