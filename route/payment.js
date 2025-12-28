@@ -80,17 +80,25 @@ export default async function paymentRoutes(fastify, options) {
     const { id: gatewayTxnId, content, transferAmount } = req.body;
 
     // 1. Tìm đơn hàng
-    // Content SePay gửi về có thể chứa thêm chữ, cần lọc hoặc match chính xác
-    // Giả sử user nhập chính xác mã 6 ký tự
+    // Trích xuất mã CK từ content (VD: "chuyen tien CKX9K2M1" -> "CKX9K2M1")
+    const ckMatch = content.match(/CK[23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{6}/);
+    
+    if (!ckMatch) {
+      fastify.log.warn(`Webhook: Không tìm thấy mã CK trong content: ${content}`);
+      return { success: true };
+    }
+
+    const ckCode = ckMatch[0];
+
     const { data: trans, error } = await supabase
       .from('payment_transactions')
       .select('*')
-      .eq('content', content)
+      .eq('content', ckCode)
       .single();
 
     if (!trans) {
         // Không tìm thấy -> Return 200 để SePay không gửi lại (vì lỗi do người dùng nhập sai nội dung)
-        fastify.log.warn(`Webhook: Không tìm thấy content ${content}`);
+        fastify.log.warn(`Webhook: Không tìm thấy giao dịch với mã ${ckCode}`);
         return { success: true };
     }
 
